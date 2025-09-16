@@ -16,17 +16,30 @@ function Footer() {
   return (
     <>
       <Center>
-        <a href="https://ton.org/">
-          <Flex align="center">
-            <Text fontSize="14" fontWeight="normal" color="#C2C2C6" mr="5px" mt="15px">
-              Built on
+        <Flex direction="column" align="center" gap={2}>
+          <Flex align="center" gap={4}>
+            <Badge colorScheme="purple" px={2} py={1}>
+              Alpha TON Capital
+            </Badge>
+            <Text fontSize="14" fontWeight="bold" color="#8B8B8F">
+              x
             </Text>
-            <TONIcon />
-            <Text fontSize="16" fontWeight="bold" color="#C2C2C6" ml="5px" mt="16px">
-              TON
-            </Text>
+            <Badge colorScheme="blue" px={2} py={1}>
+              TOKEN 2049
+            </Badge>
           </Flex>
-        </a>
+          <a href="https://ton.org/">
+            <Flex align="center">
+              <Text fontSize="14" fontWeight="normal" color="#C2C2C6" mr="5px">
+                Built on
+              </Text>
+              <TONIcon />
+              <Text fontSize="16" fontWeight="bold" color="#C2C2C6" ml="5px">
+                TON
+              </Text>
+            </Flex>
+          </a>
+        </Flex>
       </Center>
     </>
   );

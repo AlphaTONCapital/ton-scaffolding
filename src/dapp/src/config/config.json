@@ -1,0 +1,26 @@
+{
+  "SampleContract": {
+    "tabName": "Sample Contract",
+    "defaultAddress": "",
+    "sendFunctions": {
+      "sendIncrement": {
+        "tabName": "Increment Counter",
+        "description": "Increase the counter value"
+      },
+      "sendDeploy": {
+        "tabName": "Deploy Contract",
+        "description": "Deploy a new instance of the contract"
+      }
+    },
+    "getFunctions": {
+      "getCounter": {
+        "tabName": "Get Counter",
+        "description": "Read the current counter value"
+      },
+      "getID": {
+        "tabName": "Get ID",
+        "description": "Read the contract ID"
+      }
+    }
+  }
+}

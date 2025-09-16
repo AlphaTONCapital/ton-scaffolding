@@ -6,7 +6,17 @@ import inject from "@rollup/plugin-inject";
 export default defineConfig({
   plugins: [react()],
   base: process.env.GH_PAGES ? "/blueproject/" : "./",
+  define: {
+    global: "globalThis",
+    "process.env": {},
+  },
+  resolve: {
+    alias: {
+      buffer: "buffer",
+    },
+  },
   optimizeDeps: {
+    include: ["buffer"],
     esbuildOptions: {
       define: {
         global: "globalThis",
@@ -14,13 +24,14 @@ export default defineConfig({
       plugins: [
         NodeGlobalsPolyfillPlugin({
           buffer: true,
+          process: true,
         }),
       ],
     },
   },
   build: {
     rollupOptions: {
-      plugins: [inject({ Buffer: ["Buffer", "Buffer"] })],
+      plugins: [inject({ Buffer: ["buffer", "Buffer"] })],
     },
   },
 });

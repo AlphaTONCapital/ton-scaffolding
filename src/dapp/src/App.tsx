@@ -5,11 +5,13 @@ import { ConnectButton } from "./components/ConnectButton";
 import Footer from "./components/Footer";
 import BodyRoot from "./BodyRoot";
 import NetworkBadge from "./components/NetBadge";
+import HackathonLanding from "./components/HackathonLanding";
 import { getTheme, sendTheme } from "./utils/theme";
 import { THEME, useTonConnectUI } from "@tonconnect/ui-react";
 
 function App() {
   const [isGetMethods, setIsGetMethods] = useState(false);
+  const [showHackathon, setShowHackathon] = useState(true);
   const [pathParams, setPathParams] = useState<{
     wrapper?: string;
     method?: string;
@@ -63,34 +65,43 @@ function App() {
     });
 
     if (providedMethodFromPath?.startsWith("get")) setIsGetMethods(true);
+    
+    // Show hackathon landing if no specific wrapper/method is provided
+    if (providedWrapperFromPath || providedMethodFromPath) {
+      setShowHackathon(false);
+    }
   }, []);
 
   return (
     <ChakraProvider theme={isGetMethods ? getTheme : sendTheme}>
       <NetworkBadge />
-      <Box padding={["30px 0px", "20px 20px", "20px 70px", "20px 70px"]} backgroundColor="#f7f9fb" min-height="100vh">
-        <Box minHeight="90vh">
-          <Box fontFamily="Inter" bg="#F7F9FB">
-            <Flex>
-              <AppTitle title={import.meta.env.VITE_REACT_APP_TITLE || "Blueprint Dapp"} />
-              <Spacer />
-              <Flex alignItems="center" mt="-6">
-                <ConnectButton />
+      {showHackathon ? (
+        <HackathonLanding />
+      ) : (
+        <Box padding={["30px 0px", "20px 20px", "20px 70px", "20px 70px"]} backgroundColor="#f7f9fb" min-height="100vh">
+          <Box minHeight="90vh">
+            <Box fontFamily="Inter" bg="#F7F9FB">
+              <Flex>
+                <AppTitle title={"Alpha TON Hackathon Scaffold"} />
+                <Spacer />
+                <Flex alignItems="center" mt="-6">
+                  <ConnectButton />
+                </Flex>
               </Flex>
-            </Flex>
-            {pathParams && (
-              <BodyRoot
-                areGetMethods={isGetMethods}
-                setIsGetMethods={setIsGetMethods}
-                wrapperFromUrl={pathParams.wrapper}
-                methodFromUrl={pathParams.method}
-                addressFromUrl={pathParams.address}
-              />
-            )}
+              {pathParams && (
+                <BodyRoot
+                  areGetMethods={isGetMethods}
+                  setIsGetMethods={setIsGetMethods}
+                  wrapperFromUrl={pathParams.wrapper}
+                  methodFromUrl={pathParams.method}
+                  addressFromUrl={pathParams.address}
+                />
+              )}
+            </Box>
           </Box>
+          <Footer />
         </Box>
-        <Footer />
-      </Box>
+      )}
     </ChakraProvider>
   );
 }

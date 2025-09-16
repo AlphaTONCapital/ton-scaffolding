@@ -1,0 +1,40 @@
+{
+  "SampleContract": {
+    "path": "SampleContract",
+    "sendFunctions": {
+      "sendIncrement": {
+        "type": "object",
+        "properties": {
+          "increase_by": {
+            "type": "number",
+            "default": 1
+          }
+        }
+      },
+      "sendDeploy": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "default": 0
+          }
+        }
+      }
+    },
+    "getFunctions": {
+      "getCounter": {
+        "type": "object",
+        "properties": {}
+      },
+      "getID": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "deploy": {
+      "codeHex": "",
+      "configType": "object"
+    },
+    "definedTypes": {}
+  }
+}
